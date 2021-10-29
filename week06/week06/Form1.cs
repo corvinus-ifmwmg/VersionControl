@@ -7,16 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using week06.Entities;
 using week06.MnbServiceReference;
 
 namespace week06
 {
     public partial class Form1 : Form
     {
+        BindingList<RateData> Rates = new BindingList<RateData>();
+        
         public Form1()
         {
             InitializeComponent();
             Hivas();
+            dataGridView1.DataSource = Rates;
         }
         private void Hivas()
         {
