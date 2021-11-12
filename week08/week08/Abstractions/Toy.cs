@@ -8,13 +8,13 @@ using System.Windows.Forms;
 
 namespace week08.Abstractions
 {
-    public class Toy : Label
+    public abstract class Toy : Label
     {
         public Toy()
         {
             AutoSize = false;
             Width = 50;
-            Height = 50;
+            Height = Width;
             Paint += Toy_Paint;
         }
 
@@ -23,12 +23,9 @@ namespace week08.Abstractions
             DrawImage(e.Graphics);
         }
 
-        protected void DrawImage(Graphics g)
-        {
-            g.FillEllipse(new SolidBrush(Color.Blue), 0, 0, Width, Height);
-        }
+        protected abstract void DrawImage(Graphics g);
 
-        public void MoveToy()
+        public virtual void MoveToy()
         {
             Left += 1;
         }
