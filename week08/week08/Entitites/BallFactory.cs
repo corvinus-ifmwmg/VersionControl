@@ -7,12 +7,12 @@ using week08.Abstractions;
 
 namespace week08.Entitites
 {
-    public class BallFactory:IToyFactory
+    public class BallFactory : IToyFactory
     {
         public Toy CreateNew()
         {
             return new Ball();
         }
     }
-    
+
 }
