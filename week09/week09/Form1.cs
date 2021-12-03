@@ -27,22 +27,7 @@ namespace week09
             BirthProbabilities = GetBirth(@"C:\Temp\születés.csv");
             DeathProbabilities = GetDeath(@"C:\Temp\halál.csv");
 
-           for (int year = 2005; year <= 2024; year++)
-            {
-             for (int i = 0; i < Population.Count; i++)
-                {
-                   SimStep(year, Population[i]);
-                }
-
-                int nbrOfMales = (from x in Population
-                                  where x.Gender == Gender.Male && x.IsAlive
-                                  select x).Count();
-                int nbrOfFemales = (from x in Population
-                                    where x.Gender == Gender.Female && x.IsAlive
-                                    select x).Count();
-                Console.WriteLine(
-                    string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, nbrOfMales, nbrOfFemales));
-            }
+            
         }
         public List<Person> GetPopulation(string csvpath)
         {
@@ -141,6 +126,41 @@ namespace week09
                     újszülött.Gender = (Gender)(rng.Next(1, 3));
                     Population.Add(újszülött);
                 }
+            }
+        }
+        public void Simulation()
+        {
+            for (int year = 2005; year <= 2024; year++)
+            {
+                for (int i = 0; i < Population.Count; i++)
+                {
+                    SimStep(year, Population[i]);
+                }
+
+                int nbrOfMales = (from x in Population
+                                  where x.Gender == Gender.Male && x.IsAlive
+                                  select x).Count();
+                int nbrOfFemales = (from x in Population
+                                    where x.Gender == Gender.Female && x.IsAlive
+                                    select x).Count();
+                Console.WriteLine(
+                    string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, nbrOfMales, nbrOfFemales));
+            }
+        }
+
+        private void startBtn_Click(object sender, EventArgs e)
+        {
+            Simulation();
+            DisplayResult();
+        }
+
+        public void DisplayResult()
+        {
+            for (int year = 2005; year < numericUpDown1.Value; year++)
+            {
+                int i = 0;
+                richTextBox1.Text += "Szimulációs év:" + year;
+                i++;
             }
         }
     }
